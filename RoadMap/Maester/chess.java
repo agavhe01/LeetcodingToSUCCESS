@@ -65,6 +65,9 @@ public class chess {
         int endRow = 4;
         int endCol = 8;
 
+
+
+        // yahh
         int minMoves1 = minMoves(n, startRow, startCol, endRow, endCol);
         assert(minMoves1 == 2): "Expected 2, actual: " + minMoves1;
 
