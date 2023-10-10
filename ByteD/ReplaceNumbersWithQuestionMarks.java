@@ -1,22 +1,7 @@
 public class ReplaceNumbersWithQuestionMarks {
     public static String replaceNumbersWithQuestionMarks(String input) {
         StringBuilder result = new StringBuilder();
-        //int i = 0;
-
         int currNum = 0;
-
-        // while (i < input.length()) {
-        //     if (Character.isDigit(input.charAt(i))) {
-        //         while (i < input.length() && Character.isDigit(input.charAt(i))) {
-        //             result.append('?');
-        //             i++;
-        //         }
-        //     } else {
-        //         result.append(input.charAt(i));
-        //         i++;
-        //     }
-        // }
-
         for(int i = 0; i < input.length(); i++){
             Character currChar = input.charAt(i);
             if (Character.isDigit(currChar)){
@@ -42,6 +27,13 @@ public class ReplaceNumbersWithQuestionMarks {
             }
         }
 
+        if (currNum != 0){
+            while(currNum > 0){
+                    result.append('?');
+                    currNum--;
+            }
+        }
+
         return result.toString();
     }
 
@@ -51,7 +43,9 @@ public class ReplaceNumbersWithQuestionMarks {
         String input3 = "abc0c";
         String input4 = "abc1c";
         String input5 = "abc101c";
-         String input6 = "ab3d3rr10l";
+        String input6 = "ab3d3rr10";
+        String input7 = "3d3rr10";
+         String input8 = "13d3rr10";
         
 
         String output1 = replaceNumbersWithQuestionMarks(input1);
@@ -60,6 +54,8 @@ public class ReplaceNumbersWithQuestionMarks {
         String output4 = replaceNumbersWithQuestionMarks(input4);
         String output5 = replaceNumbersWithQuestionMarks(input5);
         String output6 = replaceNumbersWithQuestionMarks(input6);
+        String output7 = replaceNumbersWithQuestionMarks(input7);
+         String output8 = replaceNumbersWithQuestionMarks(input8);
 
         System.out.println(output1);  // Output: "ab???d"
         System.out.println(output2);  // Output: "ab??????????c"
@@ -67,6 +63,8 @@ public class ReplaceNumbersWithQuestionMarks {
         System.out.println(output4);
         System.out.println(output5);
         System.out.println(output6);
+        System.out.println(output7);
+        System.out.println(output8);
 
         // is there is no char after the last digit (i.e digit is the last thing in the arr it does not add it)
     }
