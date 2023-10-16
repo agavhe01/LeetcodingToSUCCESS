@@ -1,4 +1,4 @@
-class Solution {
+class largestMountain {
   public int longestMountain(int[] arr) {
     int ans = 0;
         int i = 0;
@@ -27,5 +27,14 @@ class Solution {
         }
 
         return ans;
+  }
+
+  public static void main(String[] args) {
+
+    largestMountain lm = new largestMountain();
+    int[] a = {1,1,1};
+
+    System.out.println(lm.longestMountain(a));
+
   }
 }
