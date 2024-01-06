@@ -28,6 +28,8 @@ Output: 23
 Explanation: The subarray [5,4,-1,7,8] has the largest sum 23.
 
 */
+
+// KADANE
 class Solution {
    public int maxSubArray(int[] nums) {
         int n = nums.length;
