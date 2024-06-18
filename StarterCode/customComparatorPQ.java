@@ -17,3 +17,11 @@ Comparator<String> customStr = new Comparator<String>(){
 
 PriorityQueue<String> pq = new PriorityQueue<>(customStr);
 
+
+
+
+// CONVERT List to []
+
+  return res.stream().mapToInt(Integer::intValue).toArray();
+
+  result.stream().mapToInt(Integer::intValue).toArray();
