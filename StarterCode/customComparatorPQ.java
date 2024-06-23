@@ -11,7 +11,10 @@ PriorityQueue<Map.Entry<Integer, Integer>> pq = new PriorityQueue<>(customCompar
 Comparator<String> customStr = new Comparator<String>(){
     @Override
     public int compare(String s1, String s2){
-        return s1.length - s2.length();
+        return s1.length - s2.length(); // ascending        --> smallest at peek() / poll()
+        // return s2.length - s1.length(); // descending    --> largest  at peek() / poll()
+
+
     }
 };
 

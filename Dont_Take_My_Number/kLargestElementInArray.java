@@ -22,11 +22,14 @@ Output: 4
 
 */
 
-class Solution {
+import java.util.*;
+
+
+class kLargestElementInArray {
 
     public int findKthLargest(int[] nums, int k) {
         //create a min heap
-        PriorityQueue<Integer> heap = new PriorityQueue();
+        PriorityQueue<Integer> heap = new PriorityQueue<Integer>();
 
         //iterate over the array
         for (int n : nums) {
@@ -40,5 +43,22 @@ class Solution {
         }
         //finally heap has k largest elements left with root as the kth largest element
         return heap.peek();
+    }
+
+    public static void printArray(int[] arr){ for(int n: arr) System.out.print(n + "  "); }
+
+    public static void main(String[] args){
+        kLargestElementInArray kL = new kLargestElementInArray();
+
+        int[] arr1 = {3,2,1,5,6,4};
+        int[] arr2 = {3,2,3,1,2,4,5,5,6};
+
+        int res1 = kL.findKthLargest(arr1, 2);
+        int res2= kL.findKthLargest(arr2, 4);
+
+        System.out.println(res1);
+        System.out.println("\n");
+        System.out.println(res2);
+
     }
 }

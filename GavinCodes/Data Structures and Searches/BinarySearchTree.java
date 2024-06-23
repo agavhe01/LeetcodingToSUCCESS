@@ -11,6 +11,9 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.LinkedList;
+
+import java.util.*;
 
 public class BinarySearchTree{
 
@@ -67,7 +70,7 @@ public class BinarySearchTree{
         return treeRoot;
     }
 
-    // Time Complexity: 0 ?
+    // Time Complexity: 0 (log n)
     public TreeNode findMinValueNode(TreeNode treeRoot){
         TreeNode curr = treeRoot;
         while (curr != null && curr.left != null) curr = curr.left;
@@ -181,6 +184,175 @@ public class BinarySearchTree{
         System.out.println();
     }
 
+     /*
+
+    Determine if a tree is balanced 
+    Time Complexity: O(n)
+
+    */
+
+    public static int maxDepth(TreeNode treeRoot){
+        if (treeRoot == null) return 0;
+        return 1 + Math.max(maxDepth(treeRoot.left), maxDepth(treeRoot.right));
+    }
+
+    public static int minDepth(TreeNode treeRoot){
+        if (treeRoot == null) return 0;
+        return 1 + Math.min(minDepth(treeRoot.left), minDepth(treeRoot.right));
+    }
+
+    public static boolean isBalanced(TreeNode treeRoot){
+        return (maxDepth(treeRoot) - minDepth(treeRoot) <= 1);
+    }
+
+    /*
+
+    Given a binary search tree, design an algorithm which creates a list of all the nodes at each depth 
+    (i e , if you have a tree with depth D, you’ll have D linked lists)
+    Time Complexity: O(n)
+
+    */
+
+    public List<List<TreeNode>> bfsHelper(TreeNode treeRoot){
+
+        List<List<TreeNode>> result = new ArrayList<List<TreeNode>>();
+        Deque<TreeNode> dq = new ArrayDeque<TreeNode>();
+
+        if (treeRoot == null) { result.add(new ArrayList<>()); return result; }
+        else dq.add(treeRoot);
+
+        int currLevel = 0;
+
+        while (! dq.isEmpty()){
+            int currLength = dq.size();
+            List<TreeNode> currList = new ArrayList<TreeNode>();
+
+            for(int i = 0; i < currLength; i++){
+                TreeNode currNode = dq.removeFirst();
+                currList.add(currNode);
+                if (currNode.left != null) dq.add(currNode.left);
+                if (currNode.right != null) dq.add(currNode.right);
+            }
+            currLevel++;
+            result.add(currList);
+        
+        }
+        return result;
+    }
+
+    /*
+
+asdas
+    */
+
+    public static List<List<Integer>> levelOrderBottom(TreeNode troot) {
+
+        // Reverses the Order of the TreeMap Additions
+        Map<Integer, List<Integer>> map = new TreeMap<>(Collections.reverseOrder());
+        
+        traverseBST(troot, map, 0);
+        List<List<Integer>> result = new ArrayList<>();
+        for (int key : map.keySet()) result.add(map.get(key));
+        return result;
+    }
+
+    public static void traverseBST(TreeNode node, Map<Integer, List<Integer>> map, int lvl) {
+        if (node == null) return;
+
+        lvl++;
+
+        traverseBST(node.left, map, lvl);
+
+        if (map.containsKey(lvl)) {
+            map.get(lvl).add(node.value);
+        } else {
+            List<Integer> list = new ArrayList<>();
+            list.add(node.value);
+            map.put(lvl, list);
+        }
+
+        System.out.println(node.value);
+
+        traverseBST(node.right, map, lvl);
+    }
+
+    /*
+    Morris Traversal (In-Order)
+    Runtime Complexity O(n)
+    No extra space, no recursive stack
+
+
+    */
+
+    public static void morrisInOrderTraversal(TreeNode treeRoot) {
+        TreeNode current = treeRoot;
+        while (current != null) {
+
+            // If left child is null, print the current node data. Move to 
+            // right child. 
+            if (current.left == null) {
+                System.out.print(current.value + " ");
+                current = current.right;
+            } 
+
+            else {
+                TreeNode predecessor = current.left;
+
+                // Find inorder predecessor 
+                while (predecessor.right != null && predecessor.right != current) {
+                    predecessor = predecessor.right;
+                }
+
+                // If the right child of the predecessor is null, establish a temporary link to the current node
+                if (predecessor.right == null) {
+                    predecessor.right = current;
+
+                    // pre-order print
+                    
+                    current = current.left;
+                }
+
+               // If the temporary link already exists, remove it and visit the current node
+                else {
+                    predecessor.right = null;
+
+                    // in-order print
+                    System.out.print(current.value + " ");
+
+                    current = current.right;
+                }
+            }
+        }
+    }
+
+    public static void morrisPreOrderTraversal(TreeNode treeRoot){
+        TreeNode current = treeRoot;
+
+        while (current != null){
+            if (current.left == null){
+                System.out.print(current.value + " ");
+                current = current.right;
+            }
+            else{
+                TreeNode predecessor = current.left;
+                while (predecessor.right != null && predecessor.right != current) predecessor = predecessor.right;
+
+                if (predecessor.right == null){
+                    predecessor.right = current;
+                    // pre-order print
+                    System.out.print(current.value + " ");
+                    current = current.left;
+                }
+                else{
+                    predecessor.right = null;
+                    // in-order print
+                    current = current.right;
+                }
+            }
+        }
+    }
+
+
 
     public static void main(String[] args){
         BinarySearchTree bst = new BinarySearchTree(11);
@@ -225,6 +397,38 @@ public class BinarySearchTree{
         System.out.println(result2);
 
         bst.printArray(arr);
+
+        List<List<TreeNode>> resultBfsHelper = bst.bfsHelper(bst.getRoot());
+        for (List<TreeNode> ll: resultBfsHelper){
+            System.out.println();
+            for (TreeNode tn: ll){ System.out.print(tn.value + "  "); }
+        }
+
+        boolean isBalanced = bst.isBalanced(bst.getRoot());
+        System.out.println(isBalanced);
+
+        System.out.println("begin");
+        
+        List<List<Integer>> resultBfs = bst.levelOrderBottom(bst.getRoot());
+        for (List<Integer> ll: resultBfs){
+            // System.out.println();
+            // for (Integer tn: ll){ System.out.print(tn + "  "); }
+        }
+
+        System.out.println("Starting morris Inorder");
+        System.out.println();
+
+        bst.morrisInOrderTraversal(bst.getRoot());
+        System.out.println();
+
+        bst.dfsPreOrder(bst.getRoot());
+        System.out.println();
+
+        System.out.println("Starting morris pre eorder");
+        System.out.println();
+
+        bst.morrisPreOrderTraversal(bst.getRoot());
+        System.out.println();
 
         
         System.out.println("\n END OF PROGRAM MAIN!!! ");

@@ -17,8 +17,11 @@ Output: [1]
 
 */
 
-class Solution {
-    public int[] topKFrequent(int[] nums, int k) {
+import java.util.*;
+
+
+class topKFrequentElements {
+    public static int[] topKFrequent(int[] nums, int k) {
 
         int[] arr = new int[k];
         HashMap<Integer, Integer> map = new HashMap<>();
@@ -36,14 +39,15 @@ class Solution {
         
         for (Map.Entry<Integer, Integer> it : map.entrySet()) {
             pq.add(it);
-            if (pq.size() > k) pq.poll();
+            // if (pq.size() > k) pq.poll();
         }
 
         int i = k;
         while (!pq.isEmpty()) {
             Map.Entry<Integer, Integer> entry = pq.peek();
             System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
-            arr[--i] = pq.poll().getKey();
+            // arr[--i] = pq.poll().getKey();
+            pq.poll().getKey();
         }
 
         /*
@@ -54,6 +58,27 @@ class Solution {
         }                  
         */
         return arr;
+    }
+
+    public static void printArray(int[] arr){ for(int n: arr) System.out.print(n + "  "); }
+
+    public static void main(String[] args){
+        topKFrequentElements topK = new topKFrequentElements();
+
+        int[] arr1 = {1,1,1,2,2,3};
+        //int[] arr2 = {1};
+
+        int[] res1 = topK.topKFrequent(arr1, 2);
+        //int[] res2 = topK.topKFrequent(arr2, 1);
+
+        topK.printArray(res1);
+
+        System.out.println();
+
+        //topK.printArray(res1);
+
+        
+         System.out.println("Program Done");
     }
         
     }
