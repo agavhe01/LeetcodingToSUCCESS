@@ -1,0 +1,2 @@
+test your maxSumArray function on leetcode
+test your maxProductSubArray function on leetcode

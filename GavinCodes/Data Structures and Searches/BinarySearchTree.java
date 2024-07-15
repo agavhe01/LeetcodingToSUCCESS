@@ -277,7 +277,7 @@ asdas
     }
 
     /*
-    Morris Traversal (In-Order)
+    Morris Traversals 
     Runtime Complexity O(n)
     No extra space, no recursive stack
 
@@ -308,7 +308,7 @@ asdas
                     predecessor.right = current;
 
                     // pre-order print
-                    
+
                     current = current.left;
                 }
 
