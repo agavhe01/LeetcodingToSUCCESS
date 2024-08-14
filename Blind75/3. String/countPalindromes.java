@@ -8,12 +8,14 @@ public class countPalindromes{
         int count = 0;
 
         for(int i = 0; i < n; i++){
-            count += helper(str, i, i);
-            count += helper(str, i, i + 1);
+            count += helper(str, i, i);         // odd length checks
+            count += helper(str, i, i + 1);     // even length checks
         }
         return count;
     }
 
+    // counts max palindromes begin from left and right indexes
+    
     public static int helper(String str, int left, int right){
         int count = 0;
         int n = str.length();

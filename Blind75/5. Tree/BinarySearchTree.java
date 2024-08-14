@@ -30,14 +30,14 @@ public class BinarySearchTree{
         }
     }
 
-    TreeNode root;
+    public static TreeNode root;
 
     // Constructors
     public BinarySearchTree(int value){ root = new TreeNode(value); }
     public BinarySearchTree(){ root = null; }
 
     // Helpers
-    public TreeNode getRoot() { return root; }
+    public static TreeNode getRoot() { return root; }
 
     // Time Complexity: 0 (logn)
     // Notes : duplicate values ignored automatically
@@ -135,8 +135,9 @@ public class BinarySearchTree{
         int currLevel = 0;
 
         while( ! (q.isEmpty()) ){
-            System.out.print("Current Level: " + currLevel + "  --> ");
             int levelLength = q.size();
+            System.out.print("Current Level: " + currLevel + " level size: " + levelLength + "  --> ");
+          
             for(int i = 0; i < levelLength; i++){
                 TreeNode curr = q.removeFirst();
                 System.out.print(curr.value + "  ");
@@ -213,7 +214,7 @@ public class BinarySearchTree{
     */
     public boolean isSameTree(TreeNode p, TreeNode q) {        
         if (p == null && q == null) return true;
-        if (p != null && q != null && p.val == q.val){
+        if (p != null && q != null && p.value == q.value){
             return isSameTree(p.left, q.left) && 
                    isSameTree(p.right, q.right);
         }
@@ -372,13 +373,13 @@ asdas
         SC: O(1)
 
     */
-    public static void invertTree(){
+    public void invertTree(){
         TreeNode root = this.getRoot();
-        this.root = dfsInvertTree(root);
-        dfsInvertTree(root);
+        root = dfsInvertTree(root);
+        this.root = root;
     }
 
-    public static TreeNode dfsInvertTree(TreeNode root){
+    public TreeNode dfsInvertTree(TreeNode root){
         if (root ==  null) return null;
 
         TreeNode left = dfsInvertTree(root.left);
@@ -467,7 +468,18 @@ asdas
         bst.morrisPreOrderTraversal(bst.getRoot());
         System.out.println();
 
+
+
         
         System.out.println("\n END OF PROGRAM MAIN!!! ");
+
+        bst.bfs(bst.getRoot());
+
+        bst.invertTree();
+        System.out.println();
+
+        bst.dfsInOrder(bst.getRoot());
+        bst.morrisInOrderTraversal(bst.getRoot());
+        bst.bfs(bst.getRoot());
     }
 }

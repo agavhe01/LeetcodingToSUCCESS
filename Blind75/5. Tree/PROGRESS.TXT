@@ -1,0 +1,8 @@
+serialize/deserialize trees and strings
+reoerder linked list
+merge k sorted lists
+
+serialize/deserialize binary trees
+trees: 13. Design Add and Search Words Data Structure
+
+understand kth largest no data structures

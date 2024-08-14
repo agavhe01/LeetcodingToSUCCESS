@@ -21,21 +21,23 @@ public class longestPalindrome{
         end = 0;
 
         for(int i = 0; i < n; i++){
-            helper(str, i, i);
-            helper(str, i, i + 1);
+            helper(str, i, i);      // odd checks
+            helper(str, i, i + 1);  // even checks
         }
 
         return str.substring(start, end + 1);
     }
 
+    // checks for palindromes beginning at left and right indexes 
+    // 
     public static void helper(String str, int left, int right){
         while (left >= 0 && right < str.length() && str.charAt(left) == str.charAt(right)){
             left--;
             right++;
         }
 
-        left = left + 1;
-        right = right - 1;
+        left = left + 1;            // is palindrome beginning at  left + 1
+        right = right - 1;          // is palindrome ending    at right - 1
 
         if (end - start + 1 < right - left + 1){
             start = left;
