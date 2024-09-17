@@ -39,10 +39,10 @@ public class wordSearch{
         if (c != firstC) return false;
         else{
             board[i][j] = '#';
-            boolean top = dfsChecker(board, word.substring(1), i - 1, j, n, m);
+            boolean top    = dfsChecker(board, word.substring(1), i - 1, j, n, m);
             boolean bottom = dfsChecker(board, word.substring(1), i + 1, j, n, m);
-            boolean right = dfsChecker(board, word.substring(1), i , j - 1, n, m);
-            boolean left = dfsChecker(board, word.substring(1), i, j + 1, n, m);
+            boolean right  = dfsChecker(board, word.substring(1), i, j - 1, n, m);
+            boolean left   = dfsChecker(board, word.substring(1), i, j + 1, n, m);
             board[i][j] = c;
             return top || bottom || right || left;
         }

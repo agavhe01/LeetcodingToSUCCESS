@@ -52,7 +52,7 @@ public class Combination {
         for (int j = i; j < n + 1; j++) {
             curComb.add(j);
             helper2(j + 1, curComb, combs, n, k);
-            curComb.remove(curComb.size() -1);
+            curComb.remove(curComb.size() - 1);
         }
     }
 }

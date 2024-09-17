@@ -44,7 +44,7 @@ class Solution {
         long n
     ){
         if ( (n == 1) ){
-            if (count <= currMin) currMin = count;
+            currMin = Math.min(count, currMin);
             return;
         }
        
