@@ -26,7 +26,7 @@ public class groupAnagrams{
                 map.put(integerList, vals);
             }
             else{
-                vals= new ArrayList<String>();
+                vals = new ArrayList<String>();
                 vals.add(str);
                 map.put(integerList, vals);
             }

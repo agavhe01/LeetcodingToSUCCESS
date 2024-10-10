@@ -35,28 +35,30 @@ public class longestConsecutiveSequence{
     */
 
     public int findLongestConsecutiveSequence(int[] nums){
-        int result = Integer.MIN_VALUE;
+       if (nums.length == 0) return 0;
 
-        Set<Integer> map = new HashSet<Integer>();
+        Set<Integer> st = new HashSet<Integer>();
+        for(int num : nums) st.add(num);
 
-        for(int num : nums){ map.add(num); }
+        int result = 0;
 
-        for (int num : nums){
-            // if (! map.contains(num - 1)){ why this piece of code
+        for(int num : nums){
+
+            if ( !st.contains(num - 1)){
+                
                 int count = 1;
                 int i = 1;
 
-                while(map.contains(num + i)){
-                    count++;
+                while (st.contains(num + i)){
                     i++;
+                    count++;
                 }
+
                 result = Math.max(result, count);
-            // }
-                // optimization
-                if (count >= nums.length / 2) break;
+            }
 
         }
-
+        
         return result;
     }
 

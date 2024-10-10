@@ -67,7 +67,7 @@ public class SortMapEntry{
             @Override
             public int compare(Player p1, Player p2){
                 int ratingComp = Integer.compare(p1.rating, p2.rating);
-                if (ratingComp == 0) return p2.name.compareTo(p2.name);
+                if (ratingComp == 0) return p1.name.compareTo(p2.name);
                 else return ratingComp;
             }
 
@@ -88,7 +88,7 @@ public class SortMapEntry{
         cMap.put("Rooney", 90);
         cMap.put("Aguero", 90);
 
-        for (Map.Entry<Player, String> entry : playerMap.keySet()){
+        for (Map.Entry<Player, String> entry : playerMap.entrySet()){
             System.out.println("Player Name: " + entry.getValue() + " and Player Rating: " + entry.getKey().rating);
         }
 

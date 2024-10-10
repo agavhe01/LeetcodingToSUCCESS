@@ -1,0 +1,45 @@
+{
+    "rides": [
+      {
+        "rideId": 1,
+        "riderId": 101,
+        "driverId": 201,
+        "timestamp": 1633024800
+      },
+      {
+        "rideId": 2,
+        "riderId": 102,
+        "driverId": 201,
+        "timestamp": 1633028400
+      },
+      {
+        "rideId": 3,
+        "riderId": 103,
+        "driverId": 203,
+        "timestamp": 1633032000
+      }
+    ],
+    "ratings": [
+      {
+        "rideId": 1,
+        "ratingFromUserId": 101,
+        "rating": 5
+      },
+      {
+        "rideId": 2,
+        "ratingFromUserId": 102,
+        "rating": 4
+      },
+      {
+        "rideId": 3,
+        "ratingFromUserId": 103,
+        "rating": 5
+      },
+      {
+        "rideId": 2,
+        "ratingFromUserId": 202,
+        "rating": 3
+      }
+    ]
+  }
+  

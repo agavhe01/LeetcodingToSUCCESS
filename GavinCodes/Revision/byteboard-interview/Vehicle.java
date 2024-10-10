@@ -90,8 +90,10 @@ final class Vehicle {
 
      double getAverageSpeed(List<Ping> pings) {
         
+       if (pings.size() == 1) return 0.0;
        double dist = getTotalDistance(pings);
        if (dist == 0.0) return dist;
+
 
        // Since pings are sorted we only need first timestamp and last to determine time
        Ping first = pings.get(0);
@@ -102,38 +104,34 @@ final class Vehicle {
 
     }
 
-    List<Double> getAccelerations(List<Ping> pings){
-        List<Double> result = new ArrayList<>();
+   List<Double> getAccelerations(List<Ping> pings) {
+    List<Double> result = new ArrayList<>();
+    int n = pings.size();
 
-        int n = pings.size();
+    // We need at least 3 pings to calculate acceleration (2 intervals)
+    if (n <= 2) return result;
 
-        if(n <= 3) return result;
-
-        int i = 0;
-        int k = 1;
-
+    for (int i = 1; i < n - 1; i++) {
+        // Speed between pings[i-1] and pings[i]
+        double u = getAverageSpeed(Arrays.asList(pings.get(i - 1), pings.get(i)));
         
+        // Speed between pings[i] and pings[i+1]
+        double v = getAverageSpeed(Arrays.asList(pings.get(i), pings.get(i + 1)));
         
-        for(int j = 3; j < n; j++){
-           double u = getAverageSpeed(Arrays.asList(pings.get(i), pings.get(k)));
-           double v = getAverageSpeed(Arrays.asList(pings.get(k), pings.get(j)));
-           long deltaT = Ping.secondsBetween(pings.get(i), pings.get(j));
+        // Time difference between pings[i] and pings[i+1] (consecutive intervals)
+        long deltaT = Ping.secondsBetween(pings.get(i), pings.get(i + 1));
 
-           // System.out.println("u: " + u);
-           // System.out.println("v: " + v);
-           // System.out.println("deltaT : " + deltaT);
-        
+        //System.out.println("u: " + u);
+        //System.out.println("v: " + v);
+        //System.out.println("deltaT: " + deltaT);
 
-           double acc = (v - u) / deltaT;
-           result.add(acc); 
+        // Ensure there's no division by zero
+        double acc = (deltaT == 0) ? 0.0 : (v - u) / deltaT;
 
-          
-            i++;
-            k++;
-
-    
-        }
-
-        return result;
+        result.add(acc);
     }
+
+    return result;
+}
+
 }

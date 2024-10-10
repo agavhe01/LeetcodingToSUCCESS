@@ -1,3 +1,5 @@
+import java.util.*;
+
 class Runner {
 
     public static void main(String[] args) throws Exception {
@@ -23,6 +25,29 @@ class Runner {
             warehouseServer.checkForDamage());
 
         // Feel free to put any println statements below for testing and debugging
+
+        // Test case for getAverageSpeeds
+        System.out.println("~~~ My Test Case 1: getAverageSpeeds() ~~~");
+        System.out.println("Speeds of all vehicles: " + warehouseServer.getAverageSpeeds());
+        System.out.println();
+
+        // Test case for getMostTraveledSince
+        System.out.println("~~~ My Test Case 2: getMostTraveledSince(2, 1553273155) ~~~");
+        System.out.println("Expected: The top 2 most traveled vehicles since timestamp 1553273155");
+        printArrayContents("Most Traveled: ", warehouseServer.getMostTraveledSince(2, 1553273155));
+        System.out.println();
+
+
+        // Test case for accelerations in Vehicle1
+        System.out.println("~~~ My Test Case 3: getAccelerations() and distances() for vehicles ~~~");
+        List<Vehicle> vehicles = warehouseServer.getVehicles();
+        for(Vehicle v : vehicles){
+            System.out.println("Vehicle: " + v.getName());
+            System.out.println("List of acceleration values " + v.getAccelerations(v.getPings()));
+            System.out.println("Total distance for Vehicle: " + v.getName() + " " + v.getTotalDistance());
+            System.out.println();
+        }
+        
     }
 
     private static void printArrayContents(String description, String[] array) {

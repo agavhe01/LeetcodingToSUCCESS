@@ -33,7 +33,7 @@ public class maxProductSubArray{
 
 
         int max = Integer.MIN_VALUE, imax = 1, imin = 1;
-        for(int i=0; i<nums.length; i++){
+        for(int i = 0; i < nums.length; i++){
             if(nums[i] < 0){ 
             // If nums[i] is less than 0, it means we have encountered a negative number. In this case, we swap the values of imax and imin. This swap is done because multiplying a negative number by a negative number results in a positive number, so we want to keep track of both the maximum and minimum products when dealing with negative numbers.
             
@@ -41,8 +41,8 @@ public class maxProductSubArray{
               imax = imin;
               imin = tmp;
             }
-            imax = Math.max(imax*nums[i], nums[i]);
-            imin = Math.min(imin*nums[i], nums[i]);
+            imax = Math.max(imax * nums[i], nums[i]);
+            imin = Math.min(imin * nums[i], nums[i]);
             
             max = Math.max(max, imax);
         }

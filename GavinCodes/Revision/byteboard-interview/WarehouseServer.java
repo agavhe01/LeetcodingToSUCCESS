@@ -12,6 +12,8 @@ final class WarehouseServer {
     // vehicles is a list of vehicle instances
     private List<Vehicle> vehicles;
 
+    public List<Vehicle> getVehicles(){ return vehicles; }
+
     WarehouseServer() {
         vehicles = new ArrayList<Vehicle>();
     }
@@ -133,6 +135,7 @@ final class WarehouseServer {
 
         while (count < maxResult && !maxHeap.isEmpty()) {
             Map.Entry<String, Double> entry = maxHeap.poll();
+            // System.out.println("vehicle Name : " + entry.getKey() + " --> " + entry.getValue());
             result[count++] = entry.getKey();
         }
 
@@ -150,17 +153,41 @@ final class WarehouseServer {
     String[] checkForDamage() {
         //TODO: Implement
 
-        for(Vehicle v : this.vehicles){
-            List<Double> acc = v.getAccelerations(v.getPings());
 
-            System.out.println("Vehicle: " + v.getName());
+        List<String> potentiallyDamaged = new ArrayList<>();
 
 
-            for(Double a : acc) System.out.println(a);
+        // check for acceleratiom/deceleration values greater than a specific threshold
+        // if acc/decc exceeds then add vehicle name to list
+        double accelThreshold = 3.0;
 
+        for (Vehicle v : this.vehicles) {
+            List<Double> accelerations = v.getAccelerations(v.getPings());
+            for (double acc : accelerations) {
+                if (Math.abs(acc) > accelThreshold) {
+                    potentiallyDamaged.add(v.getName());
+                    break;
+                }
+            }
+
+       
+
+
+            // check for no movement but checking if a vehicles pings all have the same location
+            // if no movement add vehicle name to potentially damaged list
+            boolean noMovement = true;
+            Position firstPosition = v.getPings().get(0).getPosition();
+            for (Ping ping : v.getPings()) {
+                if (!ping.getPosition().equals(firstPosition)) {
+                    noMovement = false;  
+                    break; 
+                }
+            }
+
+            if (noMovement) { potentiallyDamaged.add(v.getName()); }
         }
 
-        return new String[0];
+        return potentiallyDamaged.toArray(new String[0]);
     }
 
     void initializeServer(String fileName) {
