@@ -56,3 +56,45 @@ public class Combination {
         }
     }
 }
+
+/*
+
+class Solution {
+
+    List<List<Integer>> result = new ArrayList<>();
+
+    public List<List<Integer>> combine(int n, int k) {
+
+        helper(1, n, k, new ArrayList<>());
+        return result;
+    }
+
+    public void helper(int index, int n, int k, List<Integer> curr){
+        if (curr.size() == k){
+            result.add(new ArrayList<>(curr));
+            return;
+        }
+
+        if (curr.size() > k || index > n){
+            return;
+        }
+
+        for(int i = index; i <= n; i++){
+            curr.add(i);
+            helper(i + 1, n, k, curr);
+            curr.remove(curr.size() - 1);
+        }
+
+        /*
+        curr.add(index);
+
+        helper(index + 1, n, k, curr);
+
+        curr.remove(curr.size() - 1);
+
+        helper(index + 1, n, k, curr);
+        */
+
+    }
+}
+*/

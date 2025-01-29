@@ -83,7 +83,7 @@ public List<List<Integer>> permuteUnique(int[] nums) {
         for(int i=0;i<nums.length; i++) {
 		
             if(vis[i]) continue; // if current element is already present in the temp, skip the element
-            if(i > 0 && ! vis[i-1] && nums[i] == nums[i-1]) continue; // if prev element and current element is equal, skip the element
+            if(i > 0 && ! vis[i - 1] && nums[i] == nums[i-1]) continue; // if prev element and current element is equal, skip the element
             
             vis[i] = true;
             temp.add(nums[i]);
@@ -97,7 +97,48 @@ public List<List<Integer>> permuteUnique(int[] nums) {
     }
 
 
+*
 
+class Solution {
+
+    List<List<Integer>> res = new ArrayList<>();
+
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        Arrays.sort(nums);
+        helper(0, nums);
+        return res;
+    }
+
+    public void helper(
+        int index,
+        int[] nums
+    )
+    {
+        if (index == nums.length){
+            List<Integer> curr = new ArrayList<>();
+            for(int n : nums) curr.add(n); 
+            res.add(curr);
+        }
+
+        Set<Integer> seen = new HashSet<>();
+
+        for(int i = index; i < nums.length; i++){
+            if (seen.contains(nums[i])) continue;
+            seen.add(nums[i]);
+            swap(nums, i, index);
+            helper(index + 1, nums);
+            swap(nums, i, index);
+        }
+
+    }
+
+    public void swap(int[] nums, int a, int b){
+        int temp = nums[a];
+        nums[a] = nums[b];
+        nums[b] = temp;
+    }
+}
+/*
 
 
 
